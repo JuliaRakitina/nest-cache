@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  nest-cache:
+    build:
+      context: .
+      target: development
+      network: host
+    volumes:
+      - /usr/src/app/dist
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    command: npm run start:dev
+    networks:
+      - cache-network
+    restart: always
+networks:
+  cache-network:
+    driver: bridge
