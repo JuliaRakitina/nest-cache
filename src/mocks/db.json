@@ -1,0 +1,203 @@
+{
+  "projects": [
+    {
+      "id": "first",
+      "buildings": [
+        {
+          "id": "b8g7h2",
+          "buildingName": "Example Tower",
+          "address": "123 Main Street"
+        },
+        {
+          "id": "u7y6t5",
+          "buildingName": "Central Plaza",
+          "address": "456 Elm Avenue"
+        },
+        {
+          "id": "z3x4c5",
+          "buildingName": "Skyrise Heights",
+          "address": "789 Oak Road"
+        },
+        {
+          "id": "p2o3i4",
+          "buildingName": "Sunset View",
+          "address": "101 Sunset Boulevard"
+        }
+      ],
+      "checklists": [
+        {
+          "id": "a8s7df",
+          "title": "Daily Tasks",
+          "locationIds": ["k1j2l3", "5h6g7f", "q9w8e7"]
+        },
+        {
+          "id": "b6c5v4",
+          "title": "Weekly Goals",
+          "locationIds": ["z3x4c5", "r2t3y4"]
+        },
+        {
+          "id": "m8n7b6",
+          "title": "Monthly Review",
+          "locationIds": ["v6b5n4", "u3i2o1", "1p2o3"]
+        }
+      ],
+      "members": [
+        {
+          "id": "m1n2b3",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "roleId": "abc123"
+        },
+        {
+          "id": "v4c5x6",
+          "name": "Jane Smith",
+          "email": "jane.smith@example.com",
+          "roleId": "def456"
+        },
+        {
+          "id": "z7a8q9",
+          "name": "Michael Johnson",
+          "email": "michael.johnson@example.com",
+          "roleId": "ghi789"
+        },
+        {
+          "id": "k2l3m4",
+          "name": "Emily Lee",
+          "email": "emily.lee@example.com",
+          "roleId": "jkl012"
+        }
+      ],
+      "projectConfiguration": {
+        "features": {
+          "feat1": {
+            "enabled": true
+          },
+          "feat2": {
+            "enabled": false
+          },
+          "feat3": {
+            "enabled": true
+          }
+        },
+        "forms": {
+          "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028": {
+            "id": "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028",
+            "name": "Contact Form"
+          },
+          "a8c1b2e4-0f76-4c4a-879c-902ac815c870": {
+            "id": "a8c1b2e4-0f76-4c4a-879c-902ac815c870",
+            "name": "Feedback Form"
+          },
+          "d2b6f1e9-9c38-42ca-841c-c52995af0492": {
+            "id": "d2b6f1e9-9c38-42ca-841c-c52995af0492",
+            "name": "Registration Form"
+          }
+        }
+      }
+    },
+    {
+      "id": "second",
+      "buildings": [
+        {
+          "id": "gfuys",
+          "buildingName": "Example Tower SECOND",
+          "address": "123 Main Street SECOND"
+        }
+      ],
+      "checklists": [
+        {
+          "id": "sfr45",
+          "title": "Daily Tasks SECOND",
+          "locationIds": ["k1j2l3", "5h6g7f", "q9w8e7"]
+        }
+      ],
+      "members": [
+        {
+          "id": "ufshf675",
+          "name": "John Doe SECOND",
+          "email": "john.doe@example.com SECOND",
+          "roleId": "abc123 SECOND"
+        }
+      ],
+      "projectConfiguration": {
+        "features": {
+          "feat1": {
+            "enabled": true
+          },
+          "feat2": {
+            "enabled": false
+          },
+          "feat3": {
+            "enabled": true
+          }
+        },
+        "forms": {
+          "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028": {
+            "id": "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028SECOND",
+            "name": "Contact Form SECOND"
+          },
+          "a8c1b2e4-0f76-4c4a-879c-902ac815c870": {
+            "id": "a8c1b2e4-0f76-4c4a-879c-902ac815c870SECOND",
+            "name": "Feedback Form SECOND"
+          },
+          "d2b6f1e9-9c38-42ca-841c-c52995af0492": {
+            "id": "d2b6f1e9-9c38-42ca-841c-c52995af0492SECOND",
+            "name": "Registration Form SECOND"
+          }
+        }
+      }
+    },
+    {
+      "id": "third",
+      "buildings": [
+        {
+          "id": "gfuysTHIRD",
+          "buildingName": "Example Tower THIRD",
+          "address": "123 Main Street THIRD"
+        }
+      ],
+      "checklists": [
+        {
+          "id": "sfr45THIRD",
+          "title": "Daily Tasks THIRD",
+          "locationIds": ["k1j2l3", "5h6g7f", "q9w8e7"]
+        }
+      ],
+      "members": [
+        {
+          "id": "ufshf675THIRD",
+          "name": "John Doe THIRD",
+          "email": "john.doe@example.com THIRD",
+          "roleId": "abc123 THIRD"
+        }
+      ],
+      "projectConfiguration": {
+        "features": {
+          "feat1": {
+            "enabled": true
+          },
+          "feat2": {
+            "enabled": false
+          },
+          "feat3": {
+            "enabled": true
+          }
+        },
+        "forms": {
+          "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028": {
+            "id": "f5d3a1b6-1e57-4aa1-bf87-41ef184d5028THIRD",
+            "name": "Contact Form THIRD"
+          },
+          "a8c1b2e4-0f76-4c4a-879c-902ac815c870": {
+            "id": "a8c1b2e4-0f76-4c4a-879c-902ac815c870THIRD",
+            "name": "Feedback Form SECOND"
+          },
+          "d2b6f1e9-9c38-42ca-841c-c52995af0492": {
+            "id": "d2b6f1e9-9c38-42ca-841c-c52995af0492THIRD",
+            "name": "Registration Form SECOND"
+          }
+        }
+      }
+    }
+  ]
+}

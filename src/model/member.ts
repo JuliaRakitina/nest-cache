@@ -4,3 +4,7 @@ export interface IMember {
   email?: string;
   roleId?: string;
 }
+
+export interface IMemberResponse {
+  members: IMember[];
+}

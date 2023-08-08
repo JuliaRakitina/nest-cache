@@ -3,3 +3,7 @@ export interface IBuilding {
   buildingName?: string;
   address?: string;
 }
+
+export interface IBuildingResponse {
+  buildings: IBuilding[];
+}

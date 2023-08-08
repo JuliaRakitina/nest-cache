@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import * as buildingsMOCK from './mocks/buildings.json';
-import * as checklistsMOCK from './mocks/checklists.json';
-import * as membersMOCK from './mocks/members.json';
-import * as configMOCK from './mocks/members.json';
-import { IBuilding } from './model/building';
+import * as dbMOCK from './mocks/db.json';
+import { IBuildingResponse } from './model/building';
 import { CacheService } from './cache/cache.service';
 import { CONFIG } from './config';
-import { IChecklist } from './model/checklist';
-import { IMember } from './model/member';
+import { IChecklistResponse } from './model/checklist';
 import { IConfigurationData } from './model/config';
+import { IProject } from './model/project';
+import { IMemberResponse } from './model/member';
 
 @Injectable()
 export class AppService {
@@ -18,96 +16,121 @@ export class AppService {
     await this.cacheService.clear();
   }
 
-  async getBuilding(id: string): Promise<IBuilding> {
-    // Get data from cache
-    const cachedData = await this.cacheService.get(
-      `${CONFIG.building.label}-${id}`,
-    );
-    if (cachedData) {
-      return cachedData;
+  async getBuilding(
+    id: string,
+    locationType: string,
+  ): Promise<IBuildingResponse> {
+    if (locationType === 'building') {
+      // Get data from cache
+      const cachedData = await this.cacheService.get(
+        `${CONFIG.building.label}-${id}`,
+      );
+      if (cachedData) {
+        return cachedData as IBuildingResponse;
+      }
+
+      // If data is not cached, fetch it from the datasource
+      await this.mockDelay(2000);
+      const data = dbMOCK.projects.find(
+        (project) => project.id === id,
+      ) as IProject;
+      const response: IBuildingResponse = {
+        buildings: data.buildings,
+      };
+
+      // Cache the data with a specific TTL
+      await this.cacheService.set(
+        `${CONFIG.building.label}-${id}`,
+        response,
+        CONFIG.building.ttl,
+      );
+
+      return response;
+    } else {
+      return null;
     }
-
-    // If data is not cached, fetch it from the datasource
-    await this.mockDelay(2000);
-    const data = buildingsMOCK.find((building) => building.id === id);
-
-    // Cache the data with a specific TTL
-    await this.cacheService.set(
-      `${CONFIG.building.label}-${id}`,
-      data,
-      CONFIG.building.ttl,
-    );
-
-    return data;
   }
 
-  async getChecklist(id: string): Promise<IChecklist> {
+  async getChecklist(id: string): Promise<IChecklistResponse> {
     // Get data from cache
     const cachedData = await this.cacheService.get(
       `${CONFIG.checklists.label}-${id}`,
     );
     if (cachedData) {
-      return cachedData;
+      return cachedData as IChecklistResponse;
     }
 
     // If data is not cached, fetch it from the datasource
     await this.mockDelay(2000);
-    const data = checklistsMOCK.find((checklist) => checklist.id === id);
+    const data = dbMOCK.projects.find(
+      (project) => project.id === id,
+    ) as IProject;
+    const response: IChecklistResponse = {
+      checklists: data.checklists,
+    };
 
     // Cache the data with a specific TTL
     await this.cacheService.set(
       `${CONFIG.checklists.label}-${id}`,
-      data,
+      response,
       CONFIG.checklists.ttl,
     );
 
-    return data;
+    return response;
   }
 
-  async getMember(id: string): Promise<IMember> {
+  async getMember(id: string): Promise<IMemberResponse> {
     // Get data from cache
     const cachedData = await this.cacheService.get(
       `${CONFIG.members.label}-${id}`,
     );
     if (cachedData) {
-      return cachedData;
+      return cachedData as IMemberResponse;
     }
 
     // If data is not cached, fetch it from the datasource
     await this.mockDelay(2000);
-    const data = membersMOCK.find((member) => member.id === id);
+    const data = dbMOCK.projects.find(
+      (project) => project.id === id,
+    ) as IProject;
+    const response: IMemberResponse = {
+      members: data.members,
+    };
 
     // Cache the data with a specific TTL
     await this.cacheService.set(
       `${CONFIG.members.label}-${id}`,
-      data,
+      response,
       CONFIG.members.ttl,
     );
 
-    return data;
+    return response;
   }
 
-  async getConfig(): Promise<IConfigurationData> {
+  async getConfig(id: string): Promise<IConfigurationData> {
     // Get data from cache
-    const cachedData = (await this.cacheService.get(
-      `${CONFIG.config.label}`,
-    )) as IConfigurationData;
+    const cachedData = await this.cacheService.get(
+      `${CONFIG.config.label}-${id}`,
+    );
     if (cachedData) {
-      return cachedData;
+      return cachedData as IConfigurationData;
     }
 
     // If data is not cached, fetch it from the datasource
     await this.mockDelay(2000);
-    const data = configMOCK;
+    const data = dbMOCK.projects.find(
+      (project) => project.id === id,
+    ) as IProject;
+    const response: IConfigurationData = data.projectConfiguration;
 
     // Cache the data with a specific TTL
     await this.cacheService.set(
-      `${CONFIG.config.label}`,
-      data,
+      `${CONFIG.config.label}-${id}`,
+      response,
       CONFIG.config.ttl,
     );
 
-    return data as IConfigurationData;
+    return response;
   }
 
   mockDelay(ms: number): Promise<void> {

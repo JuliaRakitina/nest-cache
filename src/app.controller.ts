@@ -1,11 +1,11 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
-import { IBuilding } from './model/building';
+import { IBuildingResponse } from './model/building';
 import { ApiQuery } from '@nestjs/swagger';
-import { IChecklist } from './model/checklist';
 import { IConfigurationData } from './model/config';
+import { IMemberResponse } from './model/member';
 
-@Controller()
+@Controller('v1')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -14,26 +14,35 @@ export class AppController {
     return this.appService.clearCache();
   }
 
-  @Get('building')
-  @ApiQuery({ name: 'id', type: String })
-  public async getBuilding(@Query('id') id: string): Promise<IBuilding> {
-    return this.appService.getBuilding(id);
+  @Get('structure')
+  @ApiQuery({ name: 'projectId', type: String })
+  @ApiQuery({ name: 'locationType', type: String })
+  public async getBuilding(
+    @Query('projectId') projectId: string,
+    @Query('locationType') locationType: string,
+  ): Promise<IBuildingResponse> {
+    return this.appService.getBuilding(projectId, locationType);
   }
 
-  @Get('checklist')
-  @ApiQuery({ name: 'id', type: String })
-  public async getChecklist(@Query('id') id: string): Promise<IChecklist> {
-    return this.appService.getChecklist(id);
-  }
-
-  @Get('member')
-  @ApiQuery({ name: 'id', type: String })
-  public async getMember(@Query('id') id: string): Promise<IChecklist> {
-    return this.appService.getMember(id);
+  @Get('project/:projectId')
+  public async getMember(
+    @Param('projectId') projectId: string,
+    @Query('fields') fields: Array<string>,
+  ): Promise<IMemberResponse> {
+    console.info(fields);
+    if (fields && fields.includes('member')) {
+      return this.appService.getMember(projectId);
+    } else {
+      return null;
+    }
   }
 
   @Get('config')
-  public async getConfig(): Promise<IConfigurationData> {
-    return this.appService.getConfig();
+  @Get('configurations')
+  @ApiQuery({ name: 'projectId', type: String })
+  public async getConfig(
+    @Query('projectId') projectId: string,
+  ): Promise<IConfigurationData> {
+    return this.appService.getConfig(projectId);
   }
 }

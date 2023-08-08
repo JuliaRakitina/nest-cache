@@ -3,3 +3,7 @@ export interface IChecklist {
   title?: string;
   locationIds?: string[];
 }
+
+export interface IChecklistResponse {
+  checklists: IChecklist[];
+}
